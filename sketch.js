@@ -12,7 +12,8 @@ function preload(){
 
 function setup(){
     background(50);
-    createCanvas(500,600);
+    createCanvas(1000,1200);
+    angleMode(DEGREES);    
 
     numRows = data.rows.length;
     for(let i=0;i<numRows;i++){
@@ -25,7 +26,7 @@ function setup(){
         data:cleanData,
         chartWidth:400,
         chartHeight:300,
-        xPos:50,
+        xPos:100,
         yPos:450,
         axisLineColour:"#FFF",
         labelTextSize:15,
@@ -34,7 +35,10 @@ function setup(){
         labelRotation:45,
         barWidth:15,
         yValue:"Value",
-        xValue:"Year"
+        xValue:"Year",
+        yLabel: "Percentage of Successful Charges",
+        xLabel: "Year",
+        xyLabelRotation: 90
     }
 
     //barCharts.push(new BarChart(cleanData,80,80,50,350,"#ff0000"));
@@ -45,6 +49,9 @@ function setup(){
 
 function draw() {
     background(50);
+    fill("white");
+    textSize(15);
+    text("Proportion of Attempts/Threats to Murder, Assaults, Harassment and Related offences reported which have led to charge or summons", 50,50);
     barCharts.forEach(bar => bar.render());
 }
 

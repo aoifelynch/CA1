@@ -14,6 +14,9 @@ class BarChart{
         this.barWidth = obj.barWidth;
         this.yValue = obj.yValue;
         this.xValue = obj.xValue;
+        this.yLabel = obj.yLabel;
+        this.xLabel = obj.xLabel;
+        this.xyLabelRotation = obj.xyLabelRotation;
     }
 
     render(){
@@ -30,6 +33,8 @@ class BarChart{
         //This loop draws the horizontal elements, bars and labels
         push()
         translate(gap,0);
+        noStroke();
+        text(this.xLabel,150,70);
         for(let i=0; i<this.data.length; i++){
             //Draws rectangle bars
             stroke(255);
@@ -41,7 +46,7 @@ class BarChart{
             noStroke();
             fill(this.labelColour);
             textAlign(LEFT,CENTER);
-
+            
             push();
             translate(this.barWidth/2,this.labelPadding);
             rotate(this.labelRotation);
@@ -55,6 +60,8 @@ class BarChart{
         //This draws the vertical elements
         let tickGap = this.chartHeight/5;
         let tickValue = max(this.data.map(d => d[this.yValue]))/5;
+
+
         for (let i=0; i<=5; i++){
             stroke(255)
             line(0,-i*tickGap,-20,-i*tickGap);
@@ -66,5 +73,7 @@ class BarChart{
         }
         
         pop ();
+        rotate(this.xyLabelRotation);
+        text(this.yLabel,160,-30);
     }
 }
