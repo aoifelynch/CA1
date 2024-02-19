@@ -71,9 +71,9 @@ class BarChart{
             textAlign(RIGHT,CENTER);
             text(round(tickValue*i),-20,-i*tickGap);
         }
+        
+        pop ();
         rotate(this.xyLabelRotation);
         text(this.yLabel,160,-30);
-        pop ();
-        
     }
 }
