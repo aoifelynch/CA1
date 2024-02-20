@@ -85,9 +85,6 @@ function setup(){
     barCharts.push(new BarChart(barChart01));
     
     console.log(barCharts);
-
-    
-
 }
 
 function draw() {
