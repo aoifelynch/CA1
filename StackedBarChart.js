@@ -1,4 +1,4 @@
-class BarChart{
+class StackedBarChart{
     constructor(obj){
         this.data = obj.data;
         this.chartWidth=obj.chartWidth;
@@ -74,7 +74,7 @@ class BarChart{
         
         pop ();
         rotate(this.xyLabelRotation);
-        text(this.yLabel,160,-30);
+        text(this.yLabel,180,-1050);
     }
 }
 

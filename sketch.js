@@ -9,7 +9,7 @@ function preload(){
 
 function setup(){
     background(50);
-    createCanvas(1000,1200);
+    createCanvas(1700,700);
     angleMode(DEGREES);    
 
     numRows = data.rows.length;
@@ -26,32 +26,75 @@ function setup(){
         data:cleanData,
         chartWidth:400,
         chartHeight:300,
-        xPos:100,
+        xPos:120,
         yPos:450,
         axisLineColour:"#FFF",
         labelTextSize:15,
         labelPadding:10,
         labelColour:'#FFF',
         labelRotation:45,
-        barWidth:15,
+        barWidth:30,
         yValue:"Total",
         xValue:"Year",
-        yLabel: "Number of suspected offenders",
+        yLabel: "Number of Suspected Offenders",
         xLabel: "Year",
         xyLabelRotation: 90
-    }
+    };
 
-    //barCharts.push(new BarChart(cleanData,80,80,50,350,"#ff0000"));
+    let barChart02 = {
+        data: cleanData,
+        chartWidth: 400,
+        chartHeight: 300,
+        xPos: 620,
+        yPos: 450,
+        axisLineColour: "#FFF",
+        labelTextSize: 15,
+        labelPadding: 10,
+        labelColour: "#FFF",
+        labelRotation: 45,
+        barWidth: 30,
+        yValue: "Total",
+        xValue: "Year",
+        chartTitle: "",
+        xLabel: "Year",
+        yLabel: "Number of Suspected Offenders",
+        xyLabelRotation: 90,
+      };
+
+      let barChart03 = {
+        data:cleanData,
+        chartWidth:400,
+        chartHeight:300,
+        xPos:1120,
+        yPos:450,
+        axisLineColour:"#FFF",
+        labelTextSize:15,
+        labelPadding:10,
+        labelColour:'#FFF',
+        labelRotation:45,
+        barWidth:30,
+        yValue:"Female",
+        xValue:"Year",
+        yLabel: "Number of Suspected Offenders",
+        xLabel: "Year",
+        xyLabelRotation: 90
+    };
+
+    barCharts.push(new HorizontalBarChart(barChart02));
+    barCharts.push(new StackedBarChart(barChart03));
     barCharts.push(new BarChart(barChart01));
-    // barCharts.push(new BarChart(cleanData,200,200,250,450,"#d9d9d9"));
-    //barCharts.push(new BarChart(cleanData,400,400,50,450,"#d9d9d9"))
+    
+    console.log(barCharts);
+
+    
+
 }
 
 function draw() {
     background(50);
     fill("white");
     textSize(15);
-    text("Number of Homicide Offences from 2018-2022", 50,50);
-    barCharts.forEach(bar => bar.render());
+    text("Number of Homicide Offences commited by Males and Females from 2018-2022",250,70);
+    barCharts.forEach((bar) => bar.render());
 }
 
