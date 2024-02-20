@@ -22,6 +22,7 @@ function setup(){
     // cleanData = data.rows.map(d => d.obj);
     // console.log(cleanData);
 
+    // Grouped Bar Chart
     let barChart01 = {
         data:cleanData,
         chartWidth:400,
@@ -30,22 +31,23 @@ function setup(){
         yPos:450,
         axisLineColour:"#FFF",
         labelTextSize:15,
-        labelPadding:10,
+        labelPadding:20,
         labelColour:'#FFF',
-        labelRotation:45,
+        labelRotation:0,
         barWidth:30,
-        yValue:"Total",
+        yValue:["Female", "Male"],
         xValue:"Year",
         yLabel: "Number of Suspected Offenders",
         xLabel: "Year",
         xyLabelRotation: 90
     };
 
+    // Horizontal Bar Chart
     let barChart02 = {
         data: cleanData,
         chartWidth: 400,
         chartHeight: 300,
-        xPos: 620,
+        xPos: 650,
         yPos: 450,
         axisLineColour: "#FFF",
         labelTextSize: 15,
@@ -61,28 +63,29 @@ function setup(){
         xyLabelRotation: 90,
       };
 
+      // Stacked Bar Chart
       let barChart03 = {
         data:cleanData,
         chartWidth:400,
         chartHeight:300,
-        xPos:1120,
+        xPos:1190,
         yPos:450,
         axisLineColour:"#FFF",
         labelTextSize:15,
         labelPadding:10,
         labelColour:'#FFF',
-        labelRotation:45,
+        labelRotation:0,
         barWidth:30,
-        yValue:"Female",
+        yValue:["Female", "Male"],
         xValue:"Year",
         yLabel: "Number of Suspected Offenders",
         xLabel: "Year",
         xyLabelRotation: 90
     };
 
+    barCharts.push(new BarChart(barChart01));
     barCharts.push(new HorizontalBarChart(barChart02));
     barCharts.push(new StackedBarChart(barChart03));
-    barCharts.push(new BarChart(barChart01));
     
     console.log(barCharts);
 }

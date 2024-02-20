@@ -17,6 +17,7 @@ class BarChart{
         this.yLabel = obj.yLabel;
         this.xLabel = obj.xLabel;
         this.xyLabelRotation = obj.xyLabelRotation;
+        this.colourPallete = ["#72cc9b", "#6f72c9"];
     }
 
     render(){
@@ -26,40 +27,54 @@ class BarChart{
         line (0,0,0,-this.chartHeight);
         line (0,0,this.chartWidth,0);
 
-        let gap = (this.chartWidth - (this.data.length * this.barWidth))/(this.data.length +1)
+         // This get the max data which we use to get a new scale formula
+        let dataMax = 0;
+        let dataMaxs = [];
+
+        for (let i = 0; i < this.yValue.length; i++){
+            dataMaxs.push(max(this.data.map((row) => +row[this.yValue[i]])));
+        }
+        // t = total number, c = current number, 0 = starting value
+        dataMax = max(dataMaxs);
+
+        let scale = this.chartHeight / dataMax;
+        let gap = (this.chartWidth - (this.data.length * this.barWidth))/(this.data.length +7)
         let labels = this.data.map(d => d[this.xValue]);
-        let scale = this.chartHeight / max(this.data.map(d => d[this.yValue]));
 
         //This loop draws the horizontal elements, bars and labels
         push()
         translate(gap,0);
         noStroke();
-        text(this.xLabel,150,70);
-        for(let i=0; i<this.data.length; i++){
-            //Draws rectangle bars
+        text(this.xLabel,150,60);
+        for (let i = 0; i < this.data.length; i++) {
+            // draws the bars
             stroke(255);
-            fill('#eb2896');
-            rect (0,0,this.barWidth, -this.data[i][this.yValue] * scale);
-
-            //Draws labels
+            push();
+            for (let j = 0; j < this.yValue.length; j++){
+                fill(this.colourPallete[j]);
+                rect(0, 0, this.barWidth, -this.data[i][this.yValue[j]] * scale);
+                translate(this.barWidth, 0);
+            }
+            pop();
+            // draws the labels
             textSize(this.labelTextSize);
             noStroke();
             fill(this.labelColour);
-            textAlign(LEFT,CENTER);
-            
+            textAlign(LEFT, CENTER);
+      
             push();
-            translate(this.barWidth/2,this.labelPadding);
+            translate(this.barWidth / 2, this.labelPadding);
             rotate(this.labelRotation);
-            text(labels[i], 0,0);
+            text(labels[i], 0, 0);
             pop();
-            
-            translate(gap+this.barWidth,0);
+    
+            translate(gap + this.barWidth * this.yValue.length, 0)
         }
         pop()
         
-        //This draws the vertical elements
+        // draws the vertical elements
         let tickGap = this.chartHeight/5;
-        let tickValue = max(this.data.map(d => d[this.yValue]))/5;
+        let tickValue = dataMax/5;
 
 
         for (let i=0; i<=5; i++){
@@ -72,9 +87,10 @@ class BarChart{
             text(round(tickValue*i),-20,-i*tickGap);
         }
         
-        pop ();
+        
         rotate(this.xyLabelRotation);
-        text(this.yLabel,160,-30);
+        text(this.yLabel, -50, 80);
+        pop ();
     }
 }
 
