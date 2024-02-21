@@ -44,7 +44,7 @@ class HorizontalBarChart {
       for (let i = 0; i < this.data.length; i++) {
         //Draws rectangle bars
         stroke(255);
-        fill("#b86dcf");
+        fill("#cc9a97");
   
         rect(0,0, this.data[i][this.xValue] * scale, -this.barWidth);
   

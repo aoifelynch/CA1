@@ -9,7 +9,7 @@ function preload(){
 
 function setup(){
     background(50);
-    createCanvas(1700,700);
+    createCanvas(1700,1700);
     angleMode(DEGREES);    
 
     numRows = data.rows.length;
@@ -82,19 +82,72 @@ function setup(){
         xLabel: "Year",
         xyLabelRotation: 90
     };
-
+    // 100% Bar Chart
+    let barChart04 = {
+        data:cleanData,
+        chartWidth:400,
+        chartHeight:300,
+        xPos:120,
+        yPos:900,
+        axisLineColour:"#FFF",
+        labelTextSize:15,
+        labelPadding:10,
+        labelColour:'#FFF',
+        labelRotation:0,
+        barWidth:30,
+        yValue:["Female", "Male"],
+        xValue:"Year",
+        yLabel: "Number of Suspected Offenders",
+        xLabel: "Year",
+        xyLabelRotation: 90
+    };
+    // Line Bar Chart
+    let barChart05 = {
+        data:cleanData,
+        chartWidth:400,
+        chartHeight:300,
+        xPos:650,
+        yPos:900,
+        axisLineColour:"#FFF",
+        labelTextSize:15,
+        labelPadding:10,
+        labelColour:'#FFF',
+        labelRotation:0,
+        barWidth:30,
+        yValue:"Total",
+        xValue:"Year",
+        yLabel: "Number of Suspected Offenders",
+        xLabel: "Year",
+        xyLabelRotation: 90
+    };
     barCharts.push(new BarChart(barChart01));
     barCharts.push(new HorizontalBarChart(barChart02));
     barCharts.push(new StackedBarChart(barChart03));
+    barCharts.push(new HundredBarChart(barChart04));
+    barCharts.push(new LineBarChart(barChart05));
     
     console.log(barCharts);
 }
 
 function draw() {
     background(50);
+    // Title of Charts
     fill("white");
+    textSize(18);
+    text("Number of Homicide Offences commited by Males and Females from 2018-2022",450,70);
+    // Legend
     textSize(15);
-    text("Number of Homicide Offences commited by Males and Females from 2018-2022",250,70);
+    fill("#72cc9b")
+    rect(1470, 53, 15, 15);
+    fill("#6f72c9")
+    rect(1470, 76, 15, 15);
+    fill("#cc9a97")
+    rect(1470, 98, 15, 15);
+    fill("white");
+    text("Female", 1500,68);
+    text("Male", 1500,91);
+    text("Total", 1500,113);
+    // Calling the redner function to draw the bar charts
     barCharts.forEach((bar) => bar.render());
 }
 
