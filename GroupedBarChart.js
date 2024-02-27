@@ -1,4 +1,4 @@
-class StackedBarChart{
+class GroupedBarChart{
     constructor(obj){
         this.data = obj.data;
         this.chartWidth=obj.chartWidth;
@@ -29,7 +29,7 @@ class StackedBarChart{
         line (0,0,0,-this.chartHeight);
         line (0,0,this.chartWidth,0);
 
-        // This get the max data which we use to get a new scale formula
+        // This gets the max value in the data to make a new scale formula
         let dataMax = 0;
         let dataMaxs = [];
 
@@ -37,34 +37,28 @@ class StackedBarChart{
         for (let i = 0; i < this.yValue.length; i++){
             dataMaxs.push(max(this.data.map((row) => +row[this.yValue[i]])));
         }
-        // Reduce adds all elements of the array into a single value. It is taking both the female and male values and adding them together to get a total number for the scale. 
-        //t = total number, c = current number, 0 = starting value
-        dataMax = dataMaxs.reduce((t,c) => t + c, 0);
+        dataMax = max(dataMaxs);
 
         let scale = this.chartHeight / dataMax;
-        let gap = (this.chartWidth - (this.data.length * this.barWidth))/(this.data.length +1)
+        let gap = (this.chartWidth - (this.data.length * this.barWidth))/(this.data.length +7)
         let labels = this.data.map(d => d[this.xValue]);
 
         //This loop draws the horizontal elements, bars and labels
         push()
         translate(gap,0);
-        stroke(255);
         strokeWeight(this.labelStroke);
-        text(this.xLabel,150,70);
+        text(this.xLabel,150,60);
         noStroke();
         textSize(17.5);
-        text(this.chartName, 0, -330);
+        text(this.chartName, 40, -340);
         for (let i = 0; i < this.data.length; i++) {
             // draws the bars
-
             stroke(255);
-            // This creates a loop that makes the two bars and translates them to be on top of each other. Also adds in a colour pallette to make the bars different colours
             push();
             for (let j = 0; j < this.yValue.length; j++){
                 fill(this.colourPallete[j]);
                 rect(0, 0, this.barWidth, -this.data[i][this.yValue[j]] * scale);
-                translate(0,-this.data[i][this.yValue[j]] * scale);
-                
+                translate(this.barWidth, 0);
             }
             pop();
             // draws the labels
@@ -76,10 +70,10 @@ class StackedBarChart{
             push();
             translate(this.barWidth / 2, this.labelPadding);
             rotate(this.labelRotation);
-            text(labels[i], -15, 10);
+            text(labels[i], 0, 0);
             pop();
-      
-            translate(gap + this.barWidth, 0);
+    
+            translate(gap + this.barWidth * this.yValue.length, 0)
         }
         pop()
         
@@ -98,9 +92,8 @@ class StackedBarChart{
             text(round(tickValue*i),-20,-i*tickGap);
         }
         
-        
-        rotate(this.xyLabelRotation);
         stroke(255);
+        rotate(this.xyLabelRotation);
         strokeWeight(this.labelStroke);
         text(this.yLabel, -50, 80);
         pop ();

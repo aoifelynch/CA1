@@ -17,6 +17,8 @@ class LineBarChart{
         this.yLabel = obj.yLabel;
         this.xLabel = obj.xLabel;
         this.xyLabelRotation = obj.xyLabelRotation;
+        this.labelStroke = obj.labelStroke;
+        this.chartName = obj.chartName;
     }
     render(){
         push ();
@@ -30,36 +32,39 @@ class LineBarChart{
         let scale = this.chartHeight / max(this.data.map(d => d[this.yValue]));
         //This loop draws the horizontal elements, bars and labels
         push()
-        translate(gap,0);
+        translate(gap + this.barWidth / 2,0);
+        stroke(255);
+        strokeWeight(this.labelStroke);
+        text(this.xLabel,130,50);
         noStroke();
-        text(this.xLabel,150,70);
-        noFill();
+        textSize(17.5);
+        text(this.chartName, 30, -350);
+        
         beginShape();
-        for(let i=0; i<this.data.length; i++){
-            //Draws the points and connects them with a line
-            // fill('#cc9a97');
-            
-            stroke(255);
-            strokeWeight(4);
-            
-            vertex(i*gap,-this.data[i][this.yValue] * scale);
-            
-            //Draws labels
-            textSize(this.labelTextSize);
-            noStroke();
-            fill(this.labelColour);
-            textAlign(LEFT,CENTER);
-            
-            push();
-            translate(this.barWidth/2,this.labelPadding);
-            rotate(this.labelRotation);
-            text(labels[i], 0,0);
-            pop();
-            translate(gap+this.barWidth,0);
-            
+        for (let i = 0; i < this.data.length; i++) {
+          // Draws the lines
+          stroke(255);
+          noFill();
+          strokeWeight(2);
+    
+          let x = i * (gap + this.barWidth);
+          let y = -this.data[i][this.yValue] * scale;
+          vertex(x, y);
+          endShape();
+    
+          // Draws labels
+          textSize(this.labelTextSize);
+          noStroke();
+          fill(this.labelColour);
+          textAlign(CENTER,CENTER);
+    
+          push();
+          translate(0, this.labelPadding);
+          text(labels[i], x, 0);
+          pop();
         }
-        endShape(CLOSE);
-        pop()
+        // endShape();
+        pop();
         
         //This draws the vertical elements
         let tickGap = this.chartHeight/5;
@@ -76,7 +81,9 @@ class LineBarChart{
         
         
         rotate(this.xyLabelRotation);
-        text(this.yLabel, -50, 80);
+        stroke(255);
+        strokeWeight(this.labelStroke);
+        text(this.yLabel, -40, 80);
         pop ();
     }
 }

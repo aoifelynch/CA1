@@ -14,10 +14,11 @@ class HorizontalBarChart {
       this.barWidth = obj.barWidth;
       this.yValue = obj.xValue;
       this.xValue = obj.yValue;
-      this.chartTitle = obj.chartTitle;
+      this.chartName = obj.chartName;
       this.xLabel = obj.yLabel;
       this.yLabel = obj.xLabel;
       this.xyLabelRotation = obj.xyLabelRotation;
+      this.labelStroke = obj.labelStroke;
     }
   
     render() {
@@ -37,9 +38,11 @@ class HorizontalBarChart {
       translate(0,-gap);
 
       noStroke();
-      textSize(18);
-      text(this.chartTitle, 120, -300);
+      textSize(17.5);
+      text(this.chartName, 40, -310);
       textSize(this.labelTextSize)
+      stroke(255);
+      strokeWeight(this.labelStroke);
       text(this.xLabel, 100, 90);
       for (let i = 0; i < this.data.length; i++) {
         //Draws rectangle bars
@@ -80,7 +83,9 @@ class HorizontalBarChart {
   
       rotate(this.xyLabelRotation);
       textSize(this.labelTextSize);
-      text(this.yLabel, -150, 85);
+      stroke(255);
+      strokeWeight(this.labelStroke);
+      text(this.yLabel, -150, 170);
       pop();
     }
   }
