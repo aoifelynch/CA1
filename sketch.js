@@ -179,22 +179,45 @@ function setup(){
 
 function draw() {
     background(50);
-    // Title of Charts
+    // Title
     fill("white");
     textSize(20);
     text("Recorded Homicide Offences in Ireland from 2018 to 2022",650,70);
     // Legend
+    textSize(16);
+    text("Gender", 1770, 43);
+    text("Age Group", 1770, 135)
     textSize(15);
-    fill("#72cc9b")
-    rect(1470, 53, 15, 15);
-    fill("#6f72c9")
-    rect(1470, 76, 15, 15);
-    fill("#cc9a97")
-    rect(1470, 98, 15, 15);
+
+    fill("#72cc9b");
+    rect(1770, 53, 15, 15);
+    fill("#6f72c9");
+    rect(1770, 76, 15, 15);
+    fill("#cc9a97");
+    rect(1770, 98, 15, 15);
+
+    fill("#E17075");
+    rect(1770, 145, 15, 15);
+    fill("#E1A35A");
+    rect(1770, 168, 15, 15);
+    fill("#86E0CF");
+    rect(1770, 190, 15, 15);
+    fill("#8289E1");
+    rect(1770, 213, 15, 15);
+    fill("#D580E0");
+    rect(1770, 235, 15, 15);
+
+    // Names
     fill("white");
-    text("Female", 1500,68);
-    text("Male", 1500,91);
-    text("Total", 1500,113);
+    text("Female", 1800,68);
+    text("Male", 1800,91);
+    text("Total", 1800,113);
+    text("Under 18", 1800,160);
+    text("18-29 Years", 1800,183);
+    text("30-44 Years", 1800,205);
+    text("45-59 Years", 1800,228);
+    text("60+ Years", 1800,250);
+
     // Calling the redner function to draw the bar charts
     barCharts.forEach((bar) => bar.render());
 }

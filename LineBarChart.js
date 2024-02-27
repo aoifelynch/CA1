@@ -60,7 +60,7 @@ class LineBarChart{
     
           push();
           translate(0, this.labelPadding);
-          text(labels[i], x, 0);
+          text(labels[i], x, 5);
           pop();
         }
         // endShape();

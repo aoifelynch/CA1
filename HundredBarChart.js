@@ -42,7 +42,16 @@ class HundredBarChart{
         //t = total number, c = current number, 0 = starting value
         dataMax = dataMaxs.reduce((t,c) => t + c, 0);
 
-        let scale = this.chartHeight / dataMax;
+        // New array to get the total value of each bar by adding all values in yValue together
+        let totalValues = [];
+        this.data.forEach(row => {
+            let sum = 0;
+            this.yValue.forEach(y => {
+                sum += +row[y];
+            })
+            totalValues.push(sum);
+        })
+        
         let gap = (this.chartWidth - (this.data.length * this.barWidth))/(this.data.length +1)
         let labels = this.data.map(d => d[this.xValue]);
 
@@ -62,6 +71,8 @@ class HundredBarChart{
             // This creates a loop that makes the two bars and translates them to be on top of each other. Also adds in a colour pallette to make the bars different colours
             push();
             for (let j = 0; j < this.yValue.length; j++){
+                //The scale gets recalculated in the loop as it will be different for each bar in order to make them all 100%
+                scale = this.chartHeight / totalValues[i];
                 fill(this.colourPallete[j]);
                 rect(0, 0, this.barWidth, -this.data[i][this.yValue[j]] * scale);
                 translate(0,-this.data[i][this.yValue[j]] * scale);
