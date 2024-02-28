@@ -19,6 +19,7 @@ class LineBarChart{
         this.xyLabelRotation = obj.xyLabelRotation;
         this.labelStroke = obj.labelStroke;
         this.chartName = obj.chartName;
+        this.lineColour = obj.lineColour;
     }
     render(){
         push ();
@@ -36,14 +37,15 @@ class LineBarChart{
         stroke(255);
         strokeWeight(this.labelStroke);
         text(this.xLabel,130,50);
-        noStroke();
-        textSize(17.5);
+
+        textSize(20);
         text(this.chartName, 30, -350);
+        noStroke();
         
         beginShape();
         for (let i = 0; i < this.data.length; i++) {
           // Draws the lines
-          stroke(255);
+          stroke(this.lineColour);
           noFill();
           strokeWeight(2);
     

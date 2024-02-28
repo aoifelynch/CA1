@@ -37,9 +37,10 @@ class HorizontalBarChart {
       push();
       translate(0,-gap);
 
+
+      textSize(20);
+      text(this.chartName, 30, -310);
       noStroke();
-      textSize(17.5);
-      text(this.chartName, 40, -310);
       textSize(this.labelTextSize)
       stroke(255);
       strokeWeight(this.labelStroke);

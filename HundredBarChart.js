@@ -61,9 +61,10 @@ class HundredBarChart{
         stroke(255);
         strokeWeight(this.labelStroke);
         text(this.xLabel,150,70);
+
+        textSize(20);
+        text(this.chartName, -20, -330);
         noStroke();
-        textSize(17.5);
-        text(this.chartName, 0, -330);
         for (let i = 0; i < this.data.length; i++) {
             // draws the bars
 

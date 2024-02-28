@@ -48,9 +48,10 @@ class GroupedBarChart{
         translate(gap,0);
         strokeWeight(this.labelStroke);
         text(this.xLabel,150,60);
+
+        textSize(20);
+        text(this.chartName, 30, -340);
         noStroke();
-        textSize(17.5);
-        text(this.chartName, 40, -340);
         for (let i = 0; i < this.data.length; i++) {
             // draws the bars
             stroke(255);
